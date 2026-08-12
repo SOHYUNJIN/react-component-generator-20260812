@@ -6,3 +6,11 @@ export interface GeneratedComponent {
   code: string;
   createdAt: Date;
 }
+
+export interface StreamingState {
+  id: string;
+  prompt: string;
+  code: string;
+  isStreaming: boolean;
+  createdAt: Date;
+}
