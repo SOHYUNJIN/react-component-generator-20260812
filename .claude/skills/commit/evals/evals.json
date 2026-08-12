@@ -1,0 +1,23 @@
+{
+  "skill_name": "commit",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "커밋해줘",
+      "expected_output": "서로 무관한 기능 추가(로그인 폼 이메일 검증)와 버그 수정(날짜 계산)이 섞인 변경사항을, 각각 별도의 한국어 conventional commit(feat/fix)으로 분리해서 커밋한다.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "변경사항 저장해줘",
+      "expected_output": "동작 변화 없는 리팩터링 하나만 있는 변경사항을 단일 refactor: 커밋으로 저장한다. 불필요하게 여러 개로 쪼개지 않는다.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "커밋 좀 해줘",
+      "expected_output": "정당한 버그 수정(fix)은 커밋하되, 같이 변경된 .env(API 키 포함) 파일은 시크릿으로 판단해 커밋에서 제외하고 사용자에게 그 사실을 알린다.",
+      "files": []
+    }
+  ]
+}
