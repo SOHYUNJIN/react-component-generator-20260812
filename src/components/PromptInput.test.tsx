@@ -26,4 +26,29 @@ describe('PromptInput', () => {
     render(<PromptInput onGenerate={vi.fn()} isLoading={true} />);
     expect(screen.getByRole('button', { name: '생성 중...' })).toBeDisabled();
   });
+
+  it('글자수 카운터를 "0/500" 형식으로 보여준다', () => {
+    render(<PromptInput onGenerate={vi.fn()} isLoading={false} />);
+    expect(screen.getByText('0/500')).toBeInTheDocument();
+  });
+
+  it('입력한 글자수만큼 카운터가 갱신된다', async () => {
+    const user = userEvent.setup();
+    render(<PromptInput onGenerate={vi.fn()} isLoading={false} />);
+
+    await user.type(screen.getByRole('textbox'), '프로필 카드');
+    expect(screen.getByText('6/500')).toBeInTheDocument();
+  });
+
+  it('500자를 초과해 입력해도 500자까지만 반영되고 제출 버튼은 계속 활성 상태다', async () => {
+    const user = userEvent.setup({ delay: null });
+    render(<PromptInput onGenerate={vi.fn()} isLoading={false} />);
+
+    const textarea = screen.getByRole('textbox') as HTMLTextAreaElement;
+    await user.type(textarea, 'a'.repeat(510));
+
+    expect(textarea.value).toHaveLength(500);
+    expect(screen.getByText('500/500')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '컴포넌트 생성' })).toBeEnabled();
+  });
 });
