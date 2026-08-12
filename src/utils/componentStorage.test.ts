@@ -23,7 +23,9 @@ const localStorageMock = (() => {
   };
 })();
 
-(global as any).localStorage = localStorageMock;
+if (typeof globalThis !== 'undefined') {
+  (globalThis as unknown as Record<string, unknown>).localStorage = localStorageMock;
+}
 
 const sample: GeneratedComponent[] = [
   {
